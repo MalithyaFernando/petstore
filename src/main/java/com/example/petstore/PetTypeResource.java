@@ -88,6 +88,28 @@ public class PetTypeResource {
 		}
 	}
 	
+//	View one pet type by type
+	@APIResponses(value = {
+			@APIResponse(responseCode = "200", description = "Pet Type for id", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "PetType"))),
+			@APIResponse(responseCode = "404", description = "No Pet Type found for the id.") })
+	
+	@GET
+	@Path("{petType}")
+	public Response getPettype(@PathParam("petType") String petType) {
+		
+		for (PetType pt : pettypes) {
+			if (pt.getPetType() == petType) {
+				
+				pt.setPetTypeId(pt.getPetTypeId());
+				pt.setPetType(pt.getPetType());
+				
+				return Response.ok(pt).build();
+			}
+        }
+		
+		return Response.status(Status.NOT_FOUND).build();
+	}
+	
 //	Update a pet type
 	@APIResponses(value = {
 	        @APIResponse(responseCode = "200", description = "Pet Type Updated successfully", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "PetType"))),

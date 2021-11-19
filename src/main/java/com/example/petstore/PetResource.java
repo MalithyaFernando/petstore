@@ -76,7 +76,7 @@ public class PetResource {
 	
 	@GET
 	@Path("{petId}")
-	public Response getPet(@PathParam("petId") int petId) {
+	public Response getPetbyId(@PathParam("petId") int petId) {
 		if (petId < 0) {
 			return Response.status(Status.NOT_FOUND).build();
 		} else {
@@ -94,6 +94,54 @@ public class PetResource {
 			
 			return Response.status(Status.NOT_FOUND).build();
 		}
+	}
+	
+//	View one pet by name
+	@APIResponses(value = {
+			@APIResponse(responseCode = "200", description = "Pet for id", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "Pet"))),
+			@APIResponse(responseCode = "404", description = "No Pet found for the id.") })
+	
+	@GET
+	@Path("{petName}")
+	public Response getPetbyName(@PathParam("petName") String petName) {
+		
+		for (Pet pet : pets) {
+			if (pet.getPetName() == petName) {
+				
+				pet.setPetId(pet.getPetId());
+				pet.setPetAge(pet.getPetAge());
+				pet.setPetName(pet.getPetName());
+				pet.setPetType(pet.getPetType());
+				
+				return Response.ok(pet).build();
+			}
+        }
+		
+		return Response.status(Status.NOT_FOUND).build();
+	}
+	
+//	View one pet by type
+	@APIResponses(value = {
+			@APIResponse(responseCode = "200", description = "Pet for id", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "Pet"))),
+			@APIResponse(responseCode = "404", description = "No Pet found for the id.") })
+	
+	@GET
+	@Path("{petType}")
+	public Response getPetbyType(@PathParam("petType") String petType) {
+		
+		for (Pet pet : pets) {
+			if (pet.getPetType() == petType) {
+				
+				pet.setPetId(pet.getPetId());
+				pet.setPetAge(pet.getPetAge());
+				pet.setPetName(pet.getPetName());
+				pet.setPetType(pet.getPetType());
+				
+				return Response.ok(pet).build();
+			}
+        }
+		
+		return Response.status(Status.NOT_FOUND).build();
 	}
 	
 //	Update a pet
