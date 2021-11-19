@@ -69,7 +69,7 @@ public class PetTypeResource {
 			@APIResponse(responseCode = "404", description = "No Pet Type found for the id.") })
 	
 	@GET
-	@Path("{pettypeId}")
+	@Path("/id/{pettypeId}")
 	public Response getPettype(@PathParam("pettypeId") int pettypeId) {
 		if (pettypeId < 0) {
 			return Response.status(Status.NOT_FOUND).build();
@@ -94,7 +94,7 @@ public class PetTypeResource {
 			@APIResponse(responseCode = "404", description = "No Pet Type found for the id.") })
 	
 	@GET
-	@Path("{petType}")
+	@Path("/type/{petType}")
 	public Response getPettype(@PathParam("petType") String petType) {
 		
 		for (PetType pt : pettypes) {

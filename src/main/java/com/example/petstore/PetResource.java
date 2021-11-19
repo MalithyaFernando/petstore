@@ -75,7 +75,7 @@ public class PetResource {
 			@APIResponse(responseCode = "404", description = "No Pet found for the id.") })
 	
 	@GET
-	@Path("{petId}")
+	@Path("/id/{petId}")
 	public Response getPetbyId(@PathParam("petId") int petId) {
 		if (petId < 0) {
 			return Response.status(Status.NOT_FOUND).build();
@@ -98,11 +98,11 @@ public class PetResource {
 	
 //	View one pet by name
 	@APIResponses(value = {
-			@APIResponse(responseCode = "200", description = "Pet for id", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "Pet"))),
-			@APIResponse(responseCode = "404", description = "No Pet found for the id.") })
+			@APIResponse(responseCode = "200", description = "Pet for name", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "Pet"))),
+			@APIResponse(responseCode = "404", description = "No Pet found for the name.") })
 	
 	@GET
-	@Path("{petName}")
+	@Path("/name/{petName}")
 	public Response getPetbyName(@PathParam("petName") String petName) {
 		
 		for (Pet pet : pets) {
@@ -122,11 +122,11 @@ public class PetResource {
 	
 //	View one pet by type
 	@APIResponses(value = {
-			@APIResponse(responseCode = "200", description = "Pet for id", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "Pet"))),
-			@APIResponse(responseCode = "404", description = "No Pet found for the id.") })
+			@APIResponse(responseCode = "200", description = "Pet for type", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(ref = "Pet"))),
+			@APIResponse(responseCode = "404", description = "No Pet found for the type.") })
 	
 	@GET
-	@Path("{petType}")
+	@Path("/type/{petType}")
 	public Response getPetbyType(@PathParam("petType") String petType) {
 		
 		for (Pet pet : pets) {
