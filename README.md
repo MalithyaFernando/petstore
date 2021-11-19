@@ -56,3 +56,51 @@ If you want to learn more about building native executables, please consult http
 ## Deploying Application
 
 To deploy the demo app on a docker-compose please visit [./deploy](https://github.com/rasika/petstore/tree/master/deploy)
+
+## Run the test suite
+
+Run the test cases in PetResourceTest.java and PteTypeResourceTest.java files.
+
+Execute the test suite manually as JUnit Test in Eclipse.
+
+    ./gradlew test
+    
+Then test report can be get using this command
+
+    start ./build/reports/tests/test/index.html   
+
+## Run a CURL/WGET command to test the APIs once deployed
+
+View all the pets or pet types
+
+    curl --location --request GET 'http://localhost:8080/api/pets'
+    curl --location --request GET 'http://localhost:8080/api/petTypes'
+
+View a pet or a pet type using ID
+
+    curl --location --request GET 'http://localhost:8080/api/pets/id/1'
+    curl --location --request GET 'http://localhost:8080/api/petTypes/id/1'
+
+View a pet or a pet type using type
+
+    curl --location --request GET 'http://localhost:8080/api/pets/type/dog'
+    curl --location --request GET 'http://localhost:8080/api/petTypes/type/dog'
+    
+View a pet or a pet type using name
+
+    curl --location --request GET 'http://localhost:8080/api/pets/name/kiraa'
+    
+Add a new pet or pet type
+
+    curl --location --request POST 'http://localhost:8080/api/pets/' --header 'Content-Type: application/json' --data-raw '{"petName": "Kiraa","petAge": 4,"petType": "Dog", "petId": 1}'
+    curl --location --request POST 'http://localhost:8080/api/petTypes/' --header 'Content-Type: application/json' --data-raw '{"petTypeName":"Dog", "petTypeId": 1}'
+    
+Update an exsisting pet or pet type
+
+    curl --location --request PUT 'http://localhost:8080/api/pets/1' --header 'Content-Type: application/json' --data-raw '{"petName": "Tommy","petAge": 3,"petType": "fish", "petId": 1}'
+    curl --location --request PUT 'http://localhost:8080/api/petTypes/1' --header 'Content-Type: application/json' --data-raw '{"petTypeName":"fish", "petTypeId": 1}'
+    
+Delete an exsisting pet or pet type
+
+    curl --location --request DELETE 'http://localhost:8080/api/pets/1'
+    curl --location --request DELETE 'http://localhost:8080/api/petTypes/1'
